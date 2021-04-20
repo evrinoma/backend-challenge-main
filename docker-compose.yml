@@ -20,7 +20,7 @@ services:
             - git_clone_dir=/opt/WWW/projects/httpd
             - web_dir=/opt/WWW/projects/httpd/backend-challenge-main/code/public
             - web_server=php80.clean
-            - console=cd /opt/WWW/projects/httpd/backend-challenge-main/code && composer install && ./bin/phpunit > var/log/tests.log
+            - console=cd /opt/WWW/projects/httpd/backend-challenge-main/code && composer install && php ./bin/phpunit > var/log/tests.log
         networks:
             - virt
 

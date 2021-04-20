@@ -11,9 +11,9 @@ It includes the following tools/libraries:
 
 Nginx will run on port 8080
 
-Please to start the project & wait building till the end after that check the tests var/log/test.log:
+Please to start the project & wait building till the end. After that check the tests var/log/test.log:
 ```shell
-$ docker-compose up -d
+$ docker-compose up -d && echo $(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' php80.clean) php80.clean >> /etc/hosts
 ```
 There are 2 tests, just to make sure that the basics are working. You should see an output like
 ```
@@ -26,6 +26,12 @@ Time: 00:01.527, Memory: 22.00 MB
 
 OK (2 tests, 3 assertions)
 ```
+How to connect to container
+docker exec -it php80.clean bash -l
+or 
+ssh root@php80.clean with credentials
+login: root
+pass:  1234
 
 ## AutoDeploy
 Docker enviroment description:
