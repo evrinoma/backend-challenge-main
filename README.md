@@ -26,29 +26,31 @@ Time: 00:01.527, Memory: 22.00 MB
 
 OK (2 tests, 3 assertions)
 ```
-Docker enviroment description:
 
+## AutoDeploy
+Docker enviroment description:
+```
 PHP images only for developer mode
-    environment:
-        - ENGINE=httpd - httpd or nginx
-        - DEPLOY=yes - enable mode
-        - MODE=dev - remove xdebug if value prod
-        - NODEJS= - version nodejs
-        - git_clone_link=https:/github.com/...
-        - git_clone_dir=/opt/WWW/projects/httpd
-        - web_conf=/opt/WWW/projects/httpd/cont.api/vhost.conf - path to config
-        - web_dir=/opt/WWW/projects/httpd/cont.api - path to project folder
+environment:
+    - ENGINE=httpd - httpd or nginx
+    - DEPLOY=yes - enable mode
+    - MODE=dev - remove xdebug if value prod
+    - NODEJS= - version nodejs
+    - git_clone_link=https:/github.com/...
+    - git_clone_dir=/opt/WWW/projects/httpd
+    - web_conf=/opt/WWW/projects/httpd/cont.api/vhost.conf - path to config
+    - web_dir=/opt/WWW/projects/httpd/cont.api - path to project folder
 or
-    environment:
-        - ENGINE=httpd - httpd or nginx
-        - DEPLOY=yes - enable mode
-        - SYMFONY=yes - only for symfony app
-        - MODE=dev - remove xdebug if value prod
-        - NODEJS= - version nodejs
-        - git_clone_link=https:/github.com/.....
-        - git_clone_dir=/opt/WWW/projects/httpd 
-        - web_dir=/opt/WWW/projects/httpd/cont.api/public - path to public folder
-        - web_server=my.dns.name - server name you could set it in /etc/hosts
-        - web_alias=alias - short server name
+environment:
+    - ENGINE=httpd - httpd or nginx
+    - DEPLOY=yes - enable mode
+    - SYMFONY=yes - only for symfony app
+    - MODE=dev - remove xdebug if value prod
+    - NODEJS= - version nodejs
+    - git_clone_link=https:/github.com/.....
+    - git_clone_dir=/opt/WWW/projects/httpd 
+    - web_dir=/opt/WWW/projects/httpd/cont.api/public - path to public folder
+    - web_server=my.dns.name - server name you could set it in /etc/hosts
+    - web_alias=alias - short server name (apache)
 
 
