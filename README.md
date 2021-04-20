@@ -9,17 +9,14 @@ It includes the following tools/libraries:
 * PHPUnit 9.5
 * Full Symfony (Flex) 5.x
 
-Nginx will run on port 8080 (see docker-compose.yml)
+Nginx will run on port 8080
 
-To start the project & execute tests:
+Please to start the project & wait building till the end after that check the tests var/log/test.log:
 ```shell
 $ docker-compose up -d
-$ docker-compose exec php composer install
-$ docker-compose exec php ./bin/phpunit
 ```
 There are 2 tests, just to make sure that the basics are working. You should see an output like
 ```
-$ docker-compose exec php ./bin/phpunit
 PHPUnit 9.5.1 by Sebastian Bergmann and contributors.
 
 Testing 
@@ -29,3 +26,29 @@ Time: 00:01.527, Memory: 22.00 MB
 
 OK (2 tests, 3 assertions)
 ```
+Docker enviroment description:
+
+PHP images only for developer mode
+    environment:
+        - ENGINE=httpd - httpd or nginx
+        - DEPLOY=yes - enable mode
+        - MODE=dev - remove xdebug if value prod
+        - NODEJS= - version nodejs
+        - git_clone_link=https:/github.com/...
+        - git_clone_dir=/opt/WWW/projects/httpd
+        - web_conf=/opt/WWW/projects/httpd/cont.api/vhost.conf - path to config
+        - web_dir=/opt/WWW/projects/httpd/cont.api - path to project folder
+or
+    environment:
+        - ENGINE=httpd - httpd or nginx
+        - DEPLOY=yes - enable mode
+        - SYMFONY=yes - only for symfony app
+        - MODE=dev - remove xdebug if value prod
+        - NODEJS= - version nodejs
+        - git_clone_link=https:/github.com/.....
+        - git_clone_dir=/opt/WWW/projects/httpd 
+        - web_dir=/opt/WWW/projects/httpd/cont.api/public - path to public folder
+        - web_server=my.dns.name - server name you could set it in /etc/hosts
+        - web_alias=alias - short server name
+
+

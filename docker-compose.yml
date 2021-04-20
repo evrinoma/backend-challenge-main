@@ -1,16 +1,32 @@
 version: '3'
 services:
-  web:
-    image: nginx:latest
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./code:/var/www
-      - ./docker/nginx/site.conf:/etc/nginx/conf.d/site.conf
-    links:
-      - php
-  php:
-    build: ./docker/php
-    volumes:
-      - ./code:/var/www/
-    working_dir: /var/www/
+#    maria_db:
+#        container_name: "maria.db"
+#        image: "evrinoma/db.maria"
+#        networks:
+#            - virt
+
+    php80_clean:
+        container_name: "php80.clean"
+        image: "evrinoma/php80"
+        environment:
+            - ENGINE=nginx
+            - DEPLOY=yes
+            - SYMFONY=yes
+            - MODE=dev
+            - _XDEBUG_CLIENT=0.0.0.0
+            - _NODEJS=10
+            - git_clone_link=https://github.com/evrinoma/backend-challenge-main.git
+            - git_clone_dir=/opt/WWW/projects/httpd
+            - web_dir=/opt/WWW/projects/httpd/backend-challenge-main/code/public
+            - web_server=php80.clean
+            - console=cd /opt/WWW/projects/httpd/backend-challenge-main/code && composer install && ./bin/phpunit > var/log/tests.log
+        networks:
+            - virt
+
+networks:
+    virt:
+        driver: bridge
+        ipam:
+            driver: default
+
